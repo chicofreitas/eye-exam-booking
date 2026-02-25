@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Identity\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Domains\Identity\Services\RegisterService;
 use App\Domains\Identity\DTOs\CreateUserDTO;

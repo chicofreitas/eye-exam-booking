@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Authentication\ValueObjects;
+namespace App\Domains\Identity\ValueObjects;
 
 use InvalidArgumentException;
 
-readonly class Token
+readonly class ApiToken
 {
   public function __construct(
     public readonly string $value
@@ -12,9 +12,9 @@ readonly class Token
     $this->validate($value);
   }
 
-  public static function fromString(string $value): Token
+  public static function fromString(string $value): ApiToken
   {
-    return new Token($value);
+    return new ApiToken($value);
   }
   
   private function validate(string $value): void

@@ -24,12 +24,7 @@ class IdentityService
   {
     return DB::transaction(function () use ($dto) {
       // 1. Create Base User
-      $user = User::create([
-        'name'     => $dto->name,
-        'email'    => $dto->email,
-        'password' => Hash::make($dto->password),
-        'role'     => $dto->role
-      ]);
+      $user = User::create($dto->toArray());
 
       // 2. Use Factory to get the strategy
       $creator = $this->factory->make($dto->role);

@@ -31,4 +31,14 @@ readonly class CreateUserDTO
       profileData: $data['profile_info'] ?? []
     );
   }
+
+  public function toArray(): array
+  {
+    return [
+      'name' => $this->name,
+      'email' => $this->email,
+      'password' => $this->password,
+      'role' => $this->role,
+    ];
+  }
 }

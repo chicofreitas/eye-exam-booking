@@ -27,7 +27,7 @@ readonly class CreateUserDTO
       name: $data['name'],
       email: $data['email'],
       password: $password->hashed(),
-      role: $data['role'],
+      role: $data['role'] ?? 'patient',
       profileData: $data['profile_info'] ?? []
     );
   }

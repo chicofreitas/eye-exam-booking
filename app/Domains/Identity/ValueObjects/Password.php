@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Authentication\ValueObjects;
+namespace App\Domains\Identity\ValueObjects;
 
 use InvalidArgumentException;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +23,14 @@ readonly class Password
     if (!preg_match('/[A-Z]/', $value) || !preg_match('/[0-9]/', $value)) {
       throw new InvalidArgumentException("Password must contain at least one uppercase letter and one number.");
     }
+  }
+
+  /**
+   * Compare this Password VO with another one.
+   */
+  public function equals(Password $other): bool
+  {
+    return $this->value === $other->value;
   }
 
   /**

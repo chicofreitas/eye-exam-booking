@@ -2,6 +2,8 @@
 
 namespace App\Domains\Identity\DTOs;
 
+use App\Domains\Identity\ValueObjects\Password;
+
 readonly class CreateUserDTO
 {
   public function __construct(
@@ -14,10 +16,17 @@ readonly class CreateUserDTO
 
   public static function fromRequest(array $data): self
   {
+    $password = new Password($data['password'] ?? '');
+    $confirm  = new Password($data['confirm_password'] ?? '');
+
+    if (!$password->equals($confirm)) {
+      throw new \InvalidArgumentException("Passwords do not match.");
+    }
+
     return new self(
       name: $data['name'],
       email: $data['email'],
-      password: $data['password'],
+      password: $password->hashed(),
       role: $data['role'],
       profileData: $data['profile_info'] ?? []
     );

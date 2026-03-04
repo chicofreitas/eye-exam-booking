@@ -15,7 +15,6 @@ readonly class Password
 
   private function validate(string $value): void
   {
-    // Centralize your business rules here
     if (strlen($value) < 8) {
       throw new InvalidArgumentException("Password must be at least 8 characters.");
     }

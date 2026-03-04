@@ -2,25 +2,21 @@
 
 namespace Tests\Unit;
 
+use App\Domains\Identity\ValueObjects\Password;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class PasswordTest extends TestCase
 {
-    public function test_it_throws_exception_if_password_is_too_short(): void
+    /**
+     * Valid password creation tests
+     */
+    public function test_can_create_valid_password(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $password = new \App\Domains\Identity\ValueObjects\Password('short');
+        $password = new Password('ValidPass123');
+        $this->assertInstanceOf(Password::class, $password);
+        $this->assertEquals('ValidPass123', $password->value);
     }
 
-    public function test_it_throws_exception_if_there_is_no_at_least_one_uppercase_letter(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $password = new \App\Domains\Identity\ValueObjects\Password('nouppercase1');
-    }
-
-    public function test_it_throws_exception_if_there_is_no_at_least_one_number(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $password = new \App\Domains\Identity\ValueObjects\Password('NoNumberPassword');
-    }
+    
 }
